@@ -5,7 +5,7 @@ steps:
       deploymentScope: 'Resource Group' 
       azureResourceManagerConnection: '$(azureSubscription)' 
       location: 'Australia Southeast' 
-      action: 'Create or Update Resource Group' 
+      action: 'Create Or Update Resource Group' 
       resourceGroupName: 'rg-$(functionAppName)-$(environmentName)'
       deploymentMode: 'Incremental' 
       csmFile: '$(Pipeline.Workspace)/deploy/StorageAccount/template.json' 
