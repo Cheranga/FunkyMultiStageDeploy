@@ -36,14 +36,14 @@ namespace FunkyDeploy.Functions
             var createCustomerRequest = await _dtoService.GetModelAsync<CreateCustomerRequest>(request);
             var operation = await _customerService.CreateAsync(new Customer
             {
-                Id = Guid.NewGuid().ToString("N"),
+                Id = Guid.NewGuid().ToString("N").ToUpper(),
                 Name = createCustomerRequest.CustomerName,
                 Address = createCustomerRequest.CustomerAddress
             });
 
             if (operation.Status)
             {
-                return new StatusCodeResult((int)(HttpStatusCode.Created));
+                return new OkObjectResult(operation.Data);
             }
 
             return new BadRequestObjectResult(operation.ErrorMessage);

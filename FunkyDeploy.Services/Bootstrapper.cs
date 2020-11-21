@@ -13,7 +13,7 @@ namespace FunkyDeploy.Services
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddSingleton<ICustomerRepository, CustomerRepository>();
         }
     }
 }

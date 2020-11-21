@@ -11,21 +11,25 @@ namespace FunkyDeploy.Services.Concrete
 {
     public class CustomerService : ICustomerService
     {
+        private readonly ICustomerRepository _customerRepository;
         private readonly ILogger<CustomerService> _logger;
 
-        public CustomerService(ILogger<CustomerService> logger)
+        public CustomerService(ICustomerRepository customerRepository, ILogger<CustomerService> logger)
         {
+            _customerRepository = customerRepository;
             _logger = logger;
         }
 
-        public Task<Result> CreateAsync(Customer customer)
+        public async Task<Result<Customer>> CreateAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            var operation = await _customerRepository.CreateAsync(customer);
+            return operation;
         }
 
-        public Task<Result<Customer>> GetCustomerAsync(string customerId)
+        public async Task<Result<Customer>> GetCustomerAsync(string customerId)
         {
-            throw new NotImplementedException();
+            var operation = await _customerRepository.GetCustomerAsync(customerId);
+            return operation;
         }
     }
 }

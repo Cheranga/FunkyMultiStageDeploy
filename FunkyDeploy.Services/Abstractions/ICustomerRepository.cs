@@ -6,7 +6,7 @@ namespace FunkyDeploy.Services.Abstractions
 {
     public interface ICustomerRepository
     {
-        Task<Result> CreateAsync(Customer customer);
+        Task<Result<Customer>> CreateAsync(Customer customer);
         Task<Result<Customer>> GetCustomerAsync(string customerId);
     }
 }

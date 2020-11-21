@@ -28,6 +28,8 @@
         public TData Data { get; set; }
         public string ErrorMessage { get; set; }
 
+        public bool Status => string.IsNullOrWhiteSpace(ErrorMessage);
+
         public static Result<TData> Success(TData data)
         {
             return new Result<TData>
