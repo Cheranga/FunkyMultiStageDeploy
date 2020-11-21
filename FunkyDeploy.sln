@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyDeploy", "FunkyDeploy\FunkyDeploy.csproj", "{20DFE980-EF3C-411D-9862-5F7918B2068C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunkyDeploy.Services", "FunkyDeploy.Services\FunkyDeploy.Services.csproj", "{D5AAD486-5F19-4D0E-BFDE-777E9802939C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20DFE980-EF3C-411D-9862-5F7918B2068C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20DFE980-EF3C-411D-9862-5F7918B2068C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20DFE980-EF3C-411D-9862-5F7918B2068C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20DFE980-EF3C-411D-9862-5F7918B2068C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5AAD486-5F19-4D0E-BFDE-777E9802939C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AAD486-5F19-4D0E-BFDE-777E9802939C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AAD486-5F19-4D0E-BFDE-777E9802939C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AAD486-5F19-4D0E-BFDE-777E9802939C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A32AF08-F2FA-4C08-A6E9-C302D5D96244}
+	EndGlobalSection
+EndGlobal
