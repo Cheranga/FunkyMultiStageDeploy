@@ -28,7 +28,7 @@ stages:
     pool:
       vmImage: ${{variables.vmImage}}
     steps:
-    - template: 'buildtestpublish.yaml'
+    - template: 'build.yaml'
       parameters:        
         projectFiles: '**/*.csproj'
 
