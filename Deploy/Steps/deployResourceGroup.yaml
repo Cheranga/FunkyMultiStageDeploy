@@ -1,0 +1,15 @@
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3    
+    displayName: 'Create resource group'
+    inputs:
+      deploymentScope: 'Subscription'
+      azureResourceManagerConnection: '$(azureSubscription)'      
+      subscriptionId: '$(subscriptionId)'      
+      location: 'Australia Southeast'                    
+      deploymentMode: 'Incremental'
+      csmFile: '$(Pipeline.Workspace)/deploy/ResourceGroup/template.json'
+      csmParametersFile: '$(Pipeline.Workspace)/deploy/ResourceGroup/template.parameters.json'
+      overrideParameters: |
+        -rgName "rg-$(functionAppName)-$(EnvironmentName)"    
+        -rgLocation "Australia Southeast" 
+      

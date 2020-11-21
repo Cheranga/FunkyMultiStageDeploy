@@ -1,0 +1,81 @@
+name: $(Date:yyyyMMdd).$(Rev:r)
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - feature/*
+
+  paths:
+    exclude:
+     - doc
+     - ReadME.md
+
+pr:
+  branches:
+    include:
+    - master
+
+variables:
+- name: vmImage
+  value: 'windows-latest'
+
+stages:
+- stage: Build
+  jobs:
+  - job: 'Build'
+    pool:
+      vmImage: ${{variables.vmImage}}
+    steps:
+    - template: 'buildtestpublish.yaml'
+      parameters:        
+        projectFiles: '**/*.csproj'
+
+- stage: DEV
+  dependsOn: ['Build']
+  jobs:
+  - deployment: DEV
+    variables:
+    - template: 'Variables/dev.yaml'
+    pool:
+        vmImage: ${{variables.vmImage}}
+    environment: DEV
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: 'deploy.yaml'
+
+# - stage: TEST
+#   dependsOn: DEV
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   jobs:
+#   - deployment: TEST
+#     variables:
+#     - template: 'variables/variables.test.yaml'
+#     pool:
+#         vmImage: ${{variables.vmImage}}
+#     environment: FunkySales-TEST
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - template: 'deploy.yaml'
+
+# - stage: PROD
+#   dependsOn: TEST
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   jobs:
+#   - deployment: PROD
+#     variables:
+#     - template: 'variables/variables.prod.yaml'
+#     pool:
+#         vmImage: ${{variables.vmImage}}
+#     environment: FunkySales-PROD
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - template: 'deploy.yaml'
+
