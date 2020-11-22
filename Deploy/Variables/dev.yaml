@@ -4,3 +4,5 @@ variables:
   value: funkydeploy  
 - name: environmentName
   value: dev    
+- name: rgName
+  value: "rg-$(functionAppName)-$(environmentName)"
