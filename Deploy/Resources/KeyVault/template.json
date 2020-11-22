@@ -27,7 +27,9 @@
             }
         }
     },    
-    "variables": {},
+    "variables": {
+        "sgConnectionString": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sgName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+    },
     "resources": [{
         "name": "[parameters('keyVaultName')]",
         "type": "Microsoft.KeyVault/vaults",
@@ -41,21 +43,21 @@
             "enabledForTemplateDeployment": true,
             "enabledForDiskEncryption": true,
             "tenantId": "[subscription().tenantId]",
-            // "accessPolicies": [
-            //     {
-            //         "tenantId": "[reference(concat('Microsoft.Web/sites/',  parameters('functionAppName'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').tenantId]",
-            //         "objectId": "[reference(concat('Microsoft.Web/sites/',  parameters('functionAppName'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').principalId]",
-            //         "permissions": {
-            //             "keys": [
-            //                 "Get"
-            //             ],
-            //             "secrets": [
-            //                 "List",
-            //                 "Get"
-            //             ]
-            //         }
-            //     }
-            // ],
+            "accessPolicies": [
+                {
+                    "tenantId": "[subscription().tenantId]",
+                    "objectId": "[subscription().id]",
+                    "permissions": {
+                        "keys": [
+                            "Get"
+                        ],
+                        "secrets": [
+                            "List",
+                            "Get"
+                        ]
+                    }
+                }
+            ],
             "sku": {
                 "name": "standard",
                 "family": "A"
@@ -81,7 +83,7 @@
                     "[resourceId('Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
                 ],
                 "properties": {
-                    "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sgName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                    "value": "[variables('sgConnectionString')]"
                 }
             }
         ]
