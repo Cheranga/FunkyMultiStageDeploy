@@ -13,6 +13,6 @@ steps:
       overrideParameters: |
         -functionAppName "func-$(functionAppName)-$(environmentName)" 
         -planName "plan-$(functionAppName)-$(environmentName)" 
-        -keyVaultName "kv-$(functionAppName)-$(environmentName)"
+        -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
         -storageAccountName "st$(functionAppName)$(environmentName)" 
       
