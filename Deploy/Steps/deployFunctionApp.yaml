@@ -1,0 +1,18 @@
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3    
+    displayName: 'Create function app'
+    inputs:
+      deploymentScope: 'Resource Group' 
+      azureResourceManagerConnection: '$(azureSubscription)' 
+      location: 'Australia Southeast' 
+      action: 'Create Or Update Resource Group' 
+      resourceGroupName: '$(rgName)'
+      deploymentMode: 'Incremental' 
+      csmFile: '$(Pipeline.Workspace)/deploy/FunctionApp/template.json' 
+      csmParametersFile: '$(Pipeline.Workspace)/deploy/FunctionApp/template.parameters.json' 
+      overrideParameters: |
+        -functionAppName "func-$(functionAppName)-$(environmentName)" 
+        -planName "plan-$(functionAppName)-$(environmentName)" 
+        -keyVaultName "kv-$(functionAppName)-$(environmentName)"
+        -storageAccountName "st$(functionAppName)$(environmentName)" 
+      
