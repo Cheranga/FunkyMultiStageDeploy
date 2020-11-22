@@ -27,8 +27,7 @@
             }
         }
     },
-    "variables": {
-        "storageAccountConnectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
+    "variables": {        
         "applicationInsightsName": "[concat('appi-', parameters('functionAppName'))]",
         "apiKey": "[concat('@Microsoft.KeyVault(SecretUri=https://', parameters('keyVaultName'), '.vault.azure.net/secrets/apiKey/')]",
         "timeZone": "AUS Eastern Standard Time"
@@ -54,8 +53,8 @@
                     ],
                     "properties": {
                         "ApiKey": "[variables('apiKey')]",
-                        "AzureWebJobsStorage": "[variables('storageAccountConnectionString')]",
-                        "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[variables('storageAccountConnectionString')]",
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
+                        "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTSHARE": "[toLower(parameters('functionAppName'))]",
                         "FUNCTIONS_EXTENSION_VERSION": "~3",
                         "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('microsoft.insights/components/', variables('applicationInsightsName')), '2015-05-01').InstrumentationKey]",
