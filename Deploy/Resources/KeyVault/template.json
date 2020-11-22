@@ -52,7 +52,7 @@
             "accessPolicies": [
                 {
                     "tenantId": "[subscription().tenantId]",
-                    "objectId": "[subscription().id]",
+                    "objectId": "[subscription().tenantId]",
                     "permissions": {
                         "keys": [
                             "Get"
