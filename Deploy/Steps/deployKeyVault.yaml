@@ -1,0 +1,18 @@
+steps:
+  - task: AzureResourceManagerTemplateDeployment@3    
+    displayName: 'Create key vault'
+    inputs:
+      deploymentScope: 'Resource Group' 
+      azureResourceManagerConnection: '$(azureSubscription)' 
+      location: 'Australia Southeast' 
+      action: 'Create Or Update Resource Group' 
+      resourceGroupName: 'rg-$(functionAppName)-$(environmentName)'
+      deploymentMode: 'Incremental' 
+      csmFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.json' 
+      csmParametersFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.parameters.json' 
+      overrideParameters: |
+        -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
+        -functionAppName "$(functionAppName)" 
+        -apiKey "$(apiKey)" 
+        -sgName "st$(functionAppName)$(environmentName)" 
+      

@@ -2,3 +2,4 @@ steps:
 
 - template: 'Steps/deployResourceGroup.yaml'
 - template: 'Steps/deployStorageAccount.yaml'
+- template: 'Steps/deployKeyVault.yaml'
