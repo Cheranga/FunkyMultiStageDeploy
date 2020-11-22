@@ -2,6 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "rgName": {
+            "type":"string",
+            "metadata": {
+                "description": "The name of the resource group which the key vault will be created in."
+            }
+        },
         "keyVaultName": {
             "type":"string",
             "metadata": {
@@ -28,7 +34,7 @@
         }
     },    
     "variables": {
-        "sgConnectionString": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sgName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+        "sgAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('sgName'))]"
     },
     "resources": [{
         "name": "[parameters('keyVaultName')]",
@@ -83,7 +89,7 @@
                     "[resourceId('Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
                 ],
                 "properties": {
-                    "value": "[variables('sgConnectionString')]"
+                    "value": "[listKeys(variables('sgAccountId'), '2019-04-01').keys[0].value]"
                 }
             }
         ]

@@ -11,6 +11,7 @@ steps:
       csmFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.json' 
       csmParametersFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.parameters.json' 
       overrideParameters: |
+        -rgName "rg-$(functionAppName)-$(environmentName)" 
         -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
         -functionAppName "$(functionAppName)" 
         -apiKey "$(apiKey)" 
