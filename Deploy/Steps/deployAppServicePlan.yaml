@@ -11,5 +11,5 @@ steps:
       csmFile: '$(Pipeline.Workspace)/deploy/AppServicePlan/template.json' 
       csmParametersFile: '$(Pipeline.Workspace)/deploy/AppServicePlan/template.parameters.json' 
       overrideParameters: |
-        -planName "plan-$(functionAppName)$(environmentName)" 
+        -planName "plan-$(functionAppName)-$(environmentName)" 
       

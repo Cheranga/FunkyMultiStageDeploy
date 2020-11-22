@@ -6,12 +6,12 @@ steps:
       azureResourceManagerConnection: '$(azureSubscription)' 
       location: 'Australia Southeast' 
       action: 'Create Or Update Resource Group' 
-      resourceGroupName: 'rg-$(functionAppName)-$(environmentName)'
+      resourceGroupName: '$(rgName)'
       deploymentMode: 'Incremental' 
       csmFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.json' 
       csmParametersFile: '$(Pipeline.Workspace)/deploy/KeyVault/template.parameters.json' 
       overrideParameters: |
-        -rgName "rg-$(functionAppName)-$(environmentName)" 
+        -rgName "$(rgName)" 
         -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
         -functionAppName "$(functionAppName)" 
         -apiKey "$(apiKey)" 

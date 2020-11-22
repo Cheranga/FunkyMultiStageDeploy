@@ -10,6 +10,6 @@ steps:
       csmFile: '$(Pipeline.Workspace)/deploy/ResourceGroup/template.json'
       csmParametersFile: '$(Pipeline.Workspace)/deploy/ResourceGroup/template.parameters.json'
       overrideParameters: |
-        -rgName "rg-$(functionAppName)-$(environmentName)"    
+        -rgName "$(rgName)"    
         -rgLocation "Australia Southeast" 
       
