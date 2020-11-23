@@ -98,11 +98,7 @@
                 "type": "systemAssigned"
             },
             "properties": {
-                "serverFarmId": "[parameters('planName')]",
-                "clientAffinityEnabled": false,
-                "siteConfig": {
-                    "AlwaysOn": true
-                }
+                "serverFarmId": "[parameters('planName')]"
             },
             "resources": [
                 {
