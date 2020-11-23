@@ -65,8 +65,8 @@
                         }
                     },
                     {
-                        "tenantId": "[reference(concat('Microsoft.Web/sites/slots/', concat(parameters('functionAppName'),'/Staging'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').tenantId]",
-                        "objectId": "[reference(concat('Microsoft.Web/sites/slots/',  concat(parameters('functionAppName'),'/Staging'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').principalId]",
+                        "tenantId": "[reference(concat('Microsoft.Web/sites/', concat(parameters('functionAppName'),'/Staging'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').tenantId]",
+                        "objectId": "[reference(concat('Microsoft.Web/sites/',  concat(parameters('functionAppName'),'/Staging'), '/providers/Microsoft.ManagedIdentity/Identities/default'), '2015-08-31-PREVIEW').principalId]",
                         "permissions": {
                             "keys": [
                                 "Get"
