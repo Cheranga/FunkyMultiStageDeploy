@@ -15,4 +15,12 @@ steps:
         -planName "plan-$(functionAppName)-$(environmentName)" 
         -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
         -storageAccountName "st$(functionAppName)$(environmentName)" 
+
+  - task: AzureFunctionApp@1
+    displayName: 'Deploy Azure Function App'
+    inputs:
+      azureSubscription: '$(azureSubscription)'
+      appType: functionApp
+      appName: 'func-$(functionAppName)-$(environmentName)'
+      package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'        
       
