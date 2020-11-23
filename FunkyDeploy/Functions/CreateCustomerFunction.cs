@@ -30,7 +30,7 @@ namespace FunkyDeploy.Functions
 
         [FunctionName(nameof(CreateCustomerFunction))]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "customers")] HttpRequest request)
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "customers")] HttpRequest request)
         {
 
             var createCustomerRequest = await _dtoService.GetModelAsync<CreateCustomerRequest>(request);

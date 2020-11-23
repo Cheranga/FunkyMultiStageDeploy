@@ -20,7 +20,7 @@ namespace FunkyDeploy.Functions
         }
 
         [FunctionName(nameof(GetCustomerFunction))]
-        public async Task<IActionResult> GetCustomerAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "customers/{customerId}")]
+        public async Task<IActionResult> GetCustomerAsync([HttpTrigger(AuthorizationLevel.Function, "get", Route = "customers/{customerId}")]
             HttpRequest request,
             string customerId)
         {
