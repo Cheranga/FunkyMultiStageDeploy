@@ -29,7 +29,7 @@
     },
     "variables": {        
         "applicationInsightsName": "[concat('appi-', parameters('functionAppName'))]",
-        // "apiKey": "[concat('@Microsoft.KeyVault(SecretUri=https://', parameters('keyVaultName'), '.vault.azure.net/secrets/apiKey/')]",
+        "apiKey": "[concat('@Microsoft.KeyVault(SecretUri=https://', parameters('keyVaultName'), '.vault.azure.net/secrets/apiKey/')]",
         "timeZone": "AUS Eastern Standard Time"
     },
     "resources": [
@@ -52,7 +52,7 @@
                         "[resourceId('microsoft.insights/components', variables('applicationInsightsName'))]"
                     ],
                     "properties": {
-                        // "ApiKey": "[variables('apiKey')]",
+                        "ApiKey": "[variables('apiKey')]",
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTSHARE": "[toLower(parameters('functionAppName'))]",

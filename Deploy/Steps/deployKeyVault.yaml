@@ -13,7 +13,7 @@ steps:
       overrideParameters: |
         -rgName "$(rgName)" 
         -keyVaultName "kv-$(functionAppName)-$(environmentName)" 
-        -functionAppName "$(functionAppName)" 
+        -functionAppName "func-$(functionAppName)-$(environmentName)" 
         -apiKey "$(apiKey)" 
         -sgName "st$(functionAppName)$(environmentName)" 
       
