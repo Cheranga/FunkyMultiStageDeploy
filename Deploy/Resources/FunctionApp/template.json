@@ -28,7 +28,7 @@
         }
     },
     "variables": {
-        "slotName": "[concat(parameters('functionAppName'), '/staging')]",
+        "slotName": "[concat(parameters('functionAppName'), '/Staging')]",
         "applicationInsightsName": "[concat('appi-', parameters('functionAppName'))]",
         "apiKey": "[concat('@Microsoft.KeyVault(SecretUri=https://', parameters('keyVaultName'), '.vault.azure.net/secrets/apiKey/')]",
         "timeZone": "AUS Eastern Standard Time"
@@ -86,28 +86,35 @@
             }
         },
         {
+            "type": "Microsoft.Web/sites/slots",
+            "name": "[concat(parameters('functionAppName'),'/Staging')]",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
             "apiVersion": "2016-08-01",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('functionAppName'))]"
             ],
-            "kind": "functionapp",
-            "location": "[resourceGroup().location]",
-            "name": "[variables('slotName')]",
-            "properties": {
-                "enabled": true,
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('planName'))]"
+            "identity": {
+                "type": "systemAssigned"
             },
-            "type": "Microsoft.Web/sites/slots",
+            "properties": {
+                "serverFarmId": "[parameters('planName')]",
+                "clientAffinityEnabled": false,
+                "siteConfig": {
+                    "AlwaysOn": true
+                }
+            },
             "resources": [
                 {
-                    "type": "config",
                     "name": "appsettings",
-                    "apiVersion": "2018-11-01",
+                    "type": "config",
+                    "apiVersion": "2016-08-01",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Web/sites/slots', variables('slotName'))]"
+                        "[resourceId('Microsoft.Web/sites/Slots', parameters('functionAppName'), 'Staging')]", 
+                        "[concat('microsoft.insights/components/',variables('applicationInsightsName'))]"
                     ],
                     "properties": {
-                        "CustomerApiKey": "This is the production setting.",
+                        "CustomerApiKey": "This is the staging setting.",
                         "ApiKey": "[variables('apiKey')]",
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
