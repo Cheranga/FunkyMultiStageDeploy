@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using FunkyDeploy.Services.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,13 @@ namespace FunkyDeploy.Functions
                 return new BadRequestObjectResult(operation.ErrorMessage);
             }
 
-            return new OkObjectResult(operation.Data);
+            var responseModel = new
+            {
+                data = operation.Data,
+                message = Environment.GetEnvironmentVariable("CustomerApiKey")
+            };
+
+            return new OkObjectResult(responseModel);
         }
     }
 }
