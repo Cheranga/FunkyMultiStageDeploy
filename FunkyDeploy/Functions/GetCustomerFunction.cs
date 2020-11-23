@@ -35,7 +35,8 @@ namespace FunkyDeploy.Functions
             var responseModel = new
             {
                 data = operation.Data,
-                message = Environment.GetEnvironmentVariable("CustomerApiKey")
+                customersKey = Environment.GetEnvironmentVariable("CustomerApiKey"),
+                ordersKey = Environment.GetEnvironmentVariable("OrdersApiKey")
             };
 
             return new OkObjectResult(responseModel);

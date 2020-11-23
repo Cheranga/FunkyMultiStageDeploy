@@ -112,6 +112,7 @@
                     "properties": {
                         "CustomerApiKey": "This is the staging setting.",
                         "ApiKey": "[variables('apiKey')]",
+                        "OrdersApiKey": "This is an orders staging setting",
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=', environment().suffixes.storage, ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value)]",
                         "WEBSITE_CONTENTSHARE": "[toLower(parameters('functionAppName'))]",
