@@ -36,23 +36,3 @@ steps:
       SpecifySlotOrASE: true
       ResourceGroupName: "$(rgName)"
       Slot: Staging  
-
-  - task: AzureAppServiceManage@0
-    displayName: 'Swap Slot'
-    inputs:
-      azureSubscription: '$(azureSubscription)'    
-      WebAppName: 'func-$(functionAppName)-$(environmentName)'      
-      ResourceGroupName: '$(rgName)'
-      SourceSlot: Staging
-      SwapWithProduction: true
-
-  - task: AzureAppServiceManage@0
-    displayName: 'Stop Slot'
-    inputs:
-      azureSubscription: '$(azureSubscription)'    
-      Action: 'Stop Azure App Service'
-      WebAppName: 'func-$(functionAppName)-$(environmentName)'      
-      SpecifySlotOrASE: true
-      ResourceGroupName: '$(rgName)'
-      Slot: Staging     
-      

@@ -47,6 +47,21 @@ stages:
           steps:
           - template: 'deploy.yaml'
 
+- stage: Approvals
+  dependsOn: ['DEV']
+  jobs:
+  - deployment: Approvals
+    variables:
+    - template: 'Variables/dev.yaml'
+    pool:
+        vmImage: ${{variables.vmImage}}
+    environment: Approvals
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: 'switch.yaml'          
+
 # - stage: TEST
 #   dependsOn: DEV
 #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
