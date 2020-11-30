@@ -5,4 +5,5 @@ steps:
 - template: 'Steps/deployStorageAccount.yaml'
 - template: 'Steps/deployFunctionApp.yaml'
 - template: 'Steps/deployKeyVault.yaml'
+- template: 'Steps/deployCode.yaml'
 
